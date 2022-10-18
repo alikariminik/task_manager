@@ -18,6 +18,7 @@
 
 <body>
     <header>
+
 		<nav class="nav-extended text-shadow light-blue darken-1">
 			<div class="nav-wrapper">
 				<a href="{{ url_for('get_tasks') }}" class="brand-logo">Task Manager</a>
@@ -29,7 +30,7 @@
 					<li><a href="#">Manage Categories</a></li>
 					<li><a href="#">Log Out</a></li>
 					<li><a href="#">Log In</a></li>
-					<li><a href="#">Register</a></li>
+					<li><a href="{{ url_for('register') }}">Register</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -42,9 +43,27 @@
             <li><a href="#">Manage Categories</a></li>
             <li><a href="#">Log Out</a></li>
             <li><a href="#">Log In</a></li>
-            <li><a href="#">Register</a></li>
+            <li><a href="{{ url_for('register') }}">Register</a></li>
         </ul>
     </header>
+
+    <section>
+        <!-- flash messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="row flashes">
+                        <h4 class="light-blue lighten-4 center-align">{{ message }}</h4>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </section>
+
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
 
     {% block content %}
     {% endblock %}
